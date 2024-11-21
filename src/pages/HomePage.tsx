@@ -1,31 +1,28 @@
-import { Brands } from '../components/home/Brands';
-import { FeatureGrid } from '../components/home/FeatureGrid';
-import { ProductGrid } from '../components/home/ProductGrid';
-import {
-	popularCelulares,
-	recentCelulares,
-} from '../data/initialData';
-import { prepareProducts } from '../helpers';
+import { Brands } from "../components/home/Brands";
+import { FeatureGrid } from "../components/home/FeatureGrid";
+import { ProductGrid } from "../components/home/ProductGrid";
+import { popularCelulares, recentCelulares } from "../data/initialData";
+import { prepareProducts } from "../helpers";
+import { useProducts } from "../hooks";
 
 export const HomePage = () => {
-	const preparedRecentProducts = prepareProducts(recentCelulares);
-	const preparedPopularProducts = prepareProducts(popularCelulares);
+  const { products, isLoading } = useProducts();
 
-	return (
-		<div>
-			<FeatureGrid />
+  const preparedRecentProducts = prepareProducts(recentCelulares);
+  const preparedPopularProducts = prepareProducts(popularCelulares);
 
-			<ProductGrid
-				title='Nuevos Productos'
-				products={preparedRecentProducts}
-			/>
+  return (
+    <div>
+      <FeatureGrid />
 
-			<ProductGrid
-				title='Productos Destacados'
-				products={preparedPopularProducts}
-			/>
+      <ProductGrid title="Nuevos Productos" products={preparedRecentProducts} />
 
-			<Brands />
-		</div>
-	);
+      <ProductGrid
+        title="Productos Destacados"
+        products={preparedPopularProducts}
+      />
+
+      <Brands />
+    </div>
+  );
 };
