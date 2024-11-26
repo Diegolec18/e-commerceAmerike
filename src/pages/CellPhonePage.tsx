@@ -11,6 +11,7 @@ import { useEffect, useMemo, useState } from "react";
 import { VariantProduct } from "../interfaces";
 import { Tag } from "../components/shared/Tag";
 import { Loader } from "../components/shared/Loader";
+import { useCounterStore } from '../store/counter.store';
 
 interface Acc{
     [key: string]: {
@@ -34,6 +35,10 @@ export const CellPhonePage = () =>{
     const [selectedVariant, setSelectedVariant] = useState<VariantProduct | null>(
         null    
     );
+    const count = useCounterStore(state => state.count);
+	const increment = useCounterStore(state => state.increment);
+	const decrement = useCounterStore(state => state.decrement);
+
 
     //Agrupar variantes por color
     const colors = useMemo(() => {
@@ -172,20 +177,21 @@ export const CellPhonePage = () =>{
                 ) : (
                     <>
                     {/* Contador */}
-                    <div className='space-y-3'>
-                        <p className="text-sm font-medium">
-                            Cantidad:
-                        </p>
-                        <div className="flex gap-8 px-5 py-3 border border-slate-200 w-fit rounded-full">
-                            <button>
-                                <LuMinus size={15}/>
-                            </button>
-                            <span className='text-slate-500 text-sm'>1</span>
-                            <button>
-                                <LuPlus size={15}/>
-                            </button>
-                        </div>
-                    </div>
+							<div className='space-y-3'>
+								<p className='text-sm font-medium'>Cantidad:</p>
+
+								<div className='flex gap-8 px-5 py-3 border border-slate-200 w-fit rounded-full'>
+									<button onClick={decrement} disabled={count === 1}>
+										<LuMinus size={15} />
+									</button>
+									<span className='text-slate-500 text-sm'>
+										{count}
+									</span>
+									<button onClick={increment}>
+										<LuPlus size={15} />
+									</button>
+								</div>
+							</div>
 
                     {/* BOTONES ACCIÓN */}
                     <div className="flex flex-col gap-3">
