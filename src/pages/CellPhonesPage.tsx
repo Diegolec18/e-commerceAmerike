@@ -2,7 +2,7 @@ import { useState } from "react";
 import { CardProduct } from "../components/products/CardProduct";
 import { ContainerFilter } from "../components/products/ContainerFilter";
 import { prepareProducts } from "../helpers";
-import { useFilteredProducts, useProducts } from "../hooks";
+import { useFilteredProducts } from "../hooks";
 import { Pagination } from "../components/shared/Paginations";
 
 export const CellPhonesPage = () => {
